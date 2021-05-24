@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>发送get请求</button>
+  <button>发送post请求</button>
+  <button>通用性方法</button>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script>
+  const btns = document.querySelectorAll('button')
+  // 配置baseURL
+  axios.defaults.baseURL = 'http://127.0.0.1:8000'
+  btns[0].onclick = function () {
+    // GET请求
+    axios.get('axios-server', {
+      // url参数
+      params: {
+        id: 100,
+        vip: 7
+      },
+      // 请求头信息
+      headers: {
+        name: 'abc',
+        age: 18
+      }
+    }).then(res => {
+      console.log(res)
+    })
+  }
+
+  btns[1].onclick = function () {
+    // POST请求
+    axios.post('axios-server', 
+      {
+        // 请求体
+        username: 'admin',
+        password: 'admin'
+      }, 
+      {
+        // url参数
+        params: {
+          id: 100,
+          vip: 7
+        },
+        // 请求头信息
+        headers: {
+          name: 'abc',
+          age: 18
+        }
+      }
+    ).then(res => {
+      console.log(res)
+    })
+  }
+
+  btns[2].onclick = function(){
+    axios({
+      // 请求类型
+      method: 'POST',
+      // url
+      url: 'axios-server',
+      // url参数
+      params: {
+        id: 100,
+        vip: 7
+      },
+      // 请求头信息
+      headers: {
+        name: 'abc',
+        age: 18
+      },
+      // 请求体
+      data: {
+        username: 'admin',
+        password: 'admin'
+      }
+    }).then(res => {
+      console.log(res)
+    })
+  }
+</script>
+</html>
