@@ -1,4 +1,5 @@
 // 1. 引入express
+const { response, request } = require('express')
 const express = require('express')
 
 // 2. 创建应用对象
@@ -91,6 +92,37 @@ app.all('/jsonp-server', (request, response) => {
   }
   const str = JSON.stringify(data)
   response.end(`handle(${str})`)
+})
+
+// 检测用户名是否存在
+app.all('/check-username', (request, response) => {
+  const data = {
+    exist: 1,
+    msg: '用户名已存在'
+  }
+  const str = JSON.stringify(data)
+  response.end(`handle(${str})`)
+})
+
+// jquery发送jsonp请求
+app.all('/jquery-jsonp-server', (request, response) => {
+  const data = {
+    name: 'abc',
+    age: 18
+  }
+  const str = JSON.stringify(data)
+  // 接收callback参数
+  const callback = request.query.callback
+  response.end(`${callback}(${str})`)
+})
+
+// CORS解决跨域
+app.all('/cors-server', (request, response) => {
+  // 设置响应头
+  response.setHeader('Access-Control-Allow-Origin', '*') // 允许所有源，解决跨域
+  response.setHeader('Access-Control-Allow-Headers', '*') // 允许所有请求头部信息
+  response.setHeader('Access-Control-Allow-Method', '*') // 允许所有请求方式
+  response.send('Hello CORS')
 })
 
 // 4. 监听端口启动服务
