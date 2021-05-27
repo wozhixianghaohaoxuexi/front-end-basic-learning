@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .dot-list {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 100px auto;
+    background-color: purple;
+  }
+
+  .dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: skyblue;
+    border-radius: 50%;
+  }
+
+  .dot-list div[class^=circle] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 3px 3px skyblue;
+    animation: expand 2s linear infinite;
+  }
+
+  .circle2 {
+    /* 不加important会因为选择器权重被上面的动画效果覆盖 */
+    animation-delay: 1s !important;
+  }
+
+  @keyframes expand {
+    from {}
+
+    50% {
+      /* 这里不用scale，因为scale会让阴影也变大 */
+      width: 40px;
+      height: 40px;
+      opacity: 1;
+    }
+
+    to {
+      width: 80px;
+      height: 80px;
+      opacity: 0;
+    }
+  }
+</style>
+
+<body>
+  <div class="dot-list">
+    <div class="dot"></div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+  </div>
+</body>
+
+</html>

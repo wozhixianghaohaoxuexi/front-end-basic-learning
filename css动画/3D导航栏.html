@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <div class="box">
+        <div class="side front">前面</div>
+        <div class="side bottom">底面</div>
+      </div>
+    </li>
+    <li>
+      <div class="box">
+        <div class="side front">前面</div>
+        <div class="side bottom">底面</div>
+      </div>
+    </li>
+    <li>
+      <div class="box">
+        <div class="side front">前面</div>
+        <div class="side bottom">底面</div>
+      </div>
+    </li>
+    <li>
+      <div class="box">
+        <div class="side front">前面</div>
+        <div class="side bottom">底面</div>
+      </div>
+    </li>
+  </ul>
+</body>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    margin: 100px 0 0 100px;
+  }
+
+  ul>li {
+    float: left;
+    width: 100px;
+    height: 30px;
+    margin: 0 5px;
+    list-style: none;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    /* 透视写在li中而不是.box，是因为让.box也具备透视属性，.box旋转时添加视觉效果 */
+    perspective: 500px;
+  }
+
+  .box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: all .6s;
+  }
+
+  .side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .front {
+    background-color: skyblue;
+    transform: translateZ(15px);
+  }
+
+  .bottom {
+    background-color: palegoldenrod;
+    /* rotate一定是负值，不然.box盒子旋转时，.bottom中的字是反的 */
+    /* 先位移再旋转 */
+    transform: translateY(15px) rotateX(-90deg);
+  }
+
+  .box:hover {
+    transform: rotateX(90deg);
+  }
+</style>
+
+</html>

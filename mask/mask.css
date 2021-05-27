@@ -56,6 +56,7 @@ a {
   font-size: 14px;
   opacity: 0;
   pointer-events: none;
+  transition: all .4s;
 }
 
 .nav .content .supernav_container .supernav_content .submenu_store>a {
