@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+      align-content: space-between;
+      width: 240px;
+      height: 240px;
+      margin: 50px auto;
+      background-color: skyblue;
+    }
+
+    .box .item {
+      position: relative;
+      width: 50px;
+      height: 50px;
+      background-color: purple;
+    }
+
+    .item::before,
+    .item::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    .item::before {
+      position: absolute;
+      right: 5px;
+      top: 10px;
+    }
+
+    .item::after {
+      position: absolute;
+      right: 5px;
+      bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+  <script>
+    document.addEventListener('mousemove', e => {
+      const itemList = document.querySelectorAll('.item')
+
+      const mouseX = e.clientX
+      const mouseY = e.clientY
+
+      itemList.forEach(item => {
+        const itemX = item.offsetLeft
+        const itemY = item.offsetTop
+
+        const radian = Math.atan2(mouseY - itemY, mouseX - itemX)
+        const angle = radian * 180 / Math.PI
+        item.style.transform = `rotate(${angle}deg)`
+      })
+    })
+  </script>
+</body>
+
+</html>

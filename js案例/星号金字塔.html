@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function writeStar(num) {
+      // 行号
+      for (let i = 1; i <= num; i++) {
+        // 输出空格，次数=总行数-当前行号
+        for (let j = 0; j < num - i; j++) {
+          document.write('&nbsp;')
+        }
+        // 输出星号+空格，次数与行号相同
+        for (let j = 0; j < i; j++) {
+          document.write('*&nbsp;')
+        }
+        document.write('<br/>')
+      }
+    }
+    writeStar(5)
+  </script>
+</body>
+
+</html>
