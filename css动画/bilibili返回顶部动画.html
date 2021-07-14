@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .fly {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      width: 80px;
+      height: 100px;
+      /* border: 2px solid #000; */
+      background-image: url(https://s1.hdslb.com/bfs/static/jinkela/space/assets/space-to-top.png);
+      background-position: -30px -36px;
+      cursor: pointer;
+      /* animation: fly 2s steps(7); */
+    }
+
+    /* 背景图动画 */
+    @keyframes fly {
+      from {
+        background-position: -30px -36px;
+      }
+
+      to {
+        background-position: -1030px -36px;
+      }
+    }
+
+    /* 背景图盒子动画 */
+    @keyframes flyBoxToTop {
+      from {
+        bottom: 30px;
+      }
+
+      to {
+        bottom: 700px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <div class="fly">
+    </div>
+  </div>
+
+  <script>
+    const fly = document.querySelector('.fly');
+    fly.addEventListener('click', () => {
+      console.log('点击');
+      fly.style.animation = 'fly 1s steps(7), flyBoxToTop .3s ease .7s';
+      // 动画结束后，清除动画属性，下次点击不用重新刷新页面
+      setTimeout(() => {
+        fly.style.animation = '';
+      }, 1000);
+      // 据说性能要高点
+      // const style = document.styleSheets[0];
+      // console.log(style.insertRule('.fly{ animation: fly 2s steps(7); }', style.rules.length))
+    })
+  </script>
+</body>
+
+</html>
