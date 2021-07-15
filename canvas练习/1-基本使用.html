@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="box"></canvas>
+</body>
+<script>
+  const box = document.getElementById('box')
+  if (box.getContext) {
+    const box2d = box.getContext('2d')
+    // 设置绘制颜色
+    // box2d.fillStyle = '#666'
+    // 绘制一个填充的矩形
+    box2d.fillRect(10, 10, 100, 100)
+    // 清除指定的矩形区域
+    box2d.clearRect(25, 25, 70, 70)
+    // 绘制一个带边框的矩形
+    box2d.strokeRect(35, 35, 50, 50)
+  }
+</script>
+
+</html>

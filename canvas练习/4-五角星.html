@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    /*
+    内接与内切、外接与外切有什么区别：
+    1、关于内切圆和外切圆.只有两圆相切时,才有内切圆和外切圆之说.当然,里面是内切圆.外面的为外切圆.即,当且仅当圆内有圆或椭圆时,才有外切圆概念.
+    2、内切圆.圆在几何图形内（可以是圆）,圆周与外侧几何图形的边（或圆周）相切.
+    3、内接圆不存在.内接图形只能是圆以外的几何图形.由内接三角形、正方形等.
+    4、外接圆,几何图形在圆内,而其向顶点在此圆周上.
+    */
+    const canvas = document.querySelector('#canvas').getContext('2d')
+    // // R为五角星外接圆（五角星外部的园）半径，r为五角星内切圆（五角星内部的园）半径
+    const R = 50
+    const r = R / 2
+    canvas.beginPath()
+    canvas.translate(R, R)
+    for (let i = 0; i < 5; i++) {
+      // 五角星五个角之间的度数为 360/5=75度，将角度转换为弧度，180度=1π弧度
+      canvas.lineTo(Math.cos((18 + i * 72) / 180 * Math.PI) * R, -Math.sin((18 + i * 72) / 180 * Math.PI) * R)
+      canvas.lineTo(Math.cos((54 + i * 72) / 180 * Math.PI) * r, -Math.sin((54 + i * 72) / 180 * Math.PI) * r)
+    }
+    canvas.closePath()
+    canvas.fillStyle = "#000"
+    canvas.fill()
+
+    // 对绘制五角星方法进行封装
+    /*
+      canvas：canvas元素的2d上下文对象
+      x：原点在x轴移动的距离
+      y：原点在y轴移动的距离
+      R：外接圆半径
+      r：内切圆半径
+    */
+    function drawStar(canvas, x, y, R, r) {
+      canvas.save()
+      canvas.beginPath()
+      canvas.translate(x, y)
+      for (let i = 0; i < 5; i++) {
+        canvas.lineTo(Math.cos((18 + i * 72) / 180 * Math.PI) * R, -Math.sin((18 + i * 72) / 180 * Math.PI) * R)
+        canvas.lineTo(Math.cos((54 + i * 72) / 180 * Math.PI) * r, -Math.sin((54 + i * 72) / 180 * Math.PI) * r)
+      }
+      canvas.closePath()
+      canvas.stroke()
+      canvas.restore()
+    }
+
+    // 随机绘制10个五角星
+    // for (let i = 0; i < 10; i++) {
+    //   const x = Math.random() * 280 + 10
+    //   const y = Math.random() * 80 + 10
+    //   const R = Math.random() * 15 + 5
+    //   drawStar(canvas, x, y, R, R / 2)
+    // }
+  </script>
+</body>
+
+</html>

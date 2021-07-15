@@ -1,0 +1,36 @@
+body {
+  width: 100%;
+  min-width: 320px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  height: 44px;
+  background-color: #2844d3;
+}
+
+header div:nth-child(1) {
+  float: left;
+  width: 15%;
+}
+
+header div:nth-child(2) {
+  float: left;
+  width: 70%;
+}
+
+header div:nth-child(3) {
+  float: left;
+  width: 15%
+}
+
+header div:nth-child(1) a {
+  display: block;
+  width: 20px;
+  height: 18px;
+  margin: 12px 0px 0px 15px;
+  background: url(../images/setting.png) no-repeat;
+  background-size: 100% 100%;
+}

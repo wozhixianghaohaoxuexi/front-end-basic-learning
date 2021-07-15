@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body onload="draw()">
+  <canvas id="canvas"></canvas>
+  <script>
+    function draw() {
+      const canvas = document.querySelector('#canvas')
+      if (canvas.getContext) {
+        const cxt = canvas.getContext('2d')
+        // 新建路径
+        cxt.beginPath()
+        // 设置起始点
+        cxt.moveTo(50, 50)
+        // 绘制直线
+        cxt.lineTo(75, 25)
+        cxt.lineTo(75, 75)
+        // 闭合路径
+        cxt.closePath()
+        // 填充颜色，形状自动闭合
+        // cxt.fill()
+        // 绘制轮廓，形状不会闭合
+        cxt.stroke()
+
+        // 绘制填充的三角形
+        cxt.beginPath()
+        cxt.moveTo(75, 50)
+        cxt.lineTo(100, 25)
+        cxt.lineTo(100, 75)
+        cxt.closePath()
+        cxt.fill()
+      }
+    }
+  </script>
+</body>
+
+</html>
