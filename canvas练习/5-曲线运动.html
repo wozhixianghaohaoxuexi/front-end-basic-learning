@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .square {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+
+      width: 10px;
+      height: 10px;
+      background-color: deeppink;
+    }
+
+    .dot {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 1px;
+      height: 1px;
+      background-color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="square"></div>
+
+  <script>
+    const square = document.querySelector('.square');
+    const startX = square.offsetLeft;
+    const startY = square.offsetTop;
+    let deg = 0;
+    let step = 100;
+
+    setInterval(() => {
+      deg++;
+      square.style.top = startY - Math.sin(deg / 180 * Math.PI) * step + 'px';
+      square.style.left = startX + deg / 180 * Math.PI * step / 2 + 'px';
+
+      const dotDiv = document.createElement('div');
+      dotDiv.classList.add('dot');
+      dotDiv.style.top = square.offsetTop + 'px';
+      dotDiv.style.left = square.offsetLeft + 'px';
+      document.body.appendChild(dotDiv);
+    }, 1000 / 60);
+  </script>
+</body>
+
+</html>

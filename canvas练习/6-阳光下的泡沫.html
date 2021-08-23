@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: skyblue;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="box" width="300" height="600"></canvas>
+
+  <script>
+    const box = document.querySelector('#box');
+
+    if (box.getContext) {
+      const cxt = box.getContext('2d');
+
+      // 定义数组存放圆的基本信息
+      let arr = [];
+
+      // 利用数组中的圆信息进行绘制
+      setInterval(() => {
+        console.log(arr);
+        // 清空画布
+        cxt.clearRect(0, 0, box.width, box.height);
+
+        for (let i = 0; i < arr.length; i++) {
+          // 不断增加圆的半径，减小圆的不透明度
+          arr[i].r++;
+          arr[i].alp -= 0.01;
+          // 当圆看不见时，从数组中删除
+          if (arr[i].alp <= 0) {
+            arr.splice(i, 1);
+          }
+
+          // 在画布中绘制圆
+          cxt.save();
+          cxt.fillStyle = `rgba(${arr[i].red},${arr[i].green},${arr[i].blue},${arr[i].alp})`;
+          cxt.beginPath();
+          cxt.arc(arr[i].x, arr[i].y, arr[i].r, 0, 2 * Math.PI);
+          cxt.fill();
+          cxt.restore();
+        }
+
+        // 在foreach中删除元素会引起抖动
+        // arr.forEach((item, index) => {
+        //   item.r++;
+        //   item.alp -= 0.01;
+        //   if (item.alp <= 0) {
+        //     arr.splice(index, 1);
+        //   }
+
+        //   cxt.save();
+        //   cxt.fillStyle = `rgba(${item.red},${item.green},${item.blue},${item.alp})`;
+        //   cxt.beginPath();
+        //   cxt.arc(item.x, item.y, item.r, 0, 2 * Math.PI);
+        //   cxt.fill();
+        //   cxt.restore();
+        // });
+      }, 1000 / 60);
+
+      // 生成随机圆信息
+      setInterval(() => {
+        // 随机生成圆心位置，半径固定，在绘制的时候逐渐增加
+        const x = Math.random() * box.width;
+        const y = Math.random() * box.height;
+        const r = 10;
+
+        // 随机生成圆的颜色，不透明度固定，在绘制的时候逐渐减小
+        const red = Math.round(Math.random() * 255);
+        const green = Math.round(Math.random() * 255);
+        const blue = Math.round(Math.random() * 255);
+        const alp = 1;
+
+        // 将生成的随机圆信息塞入数组
+        arr.push({
+          x,
+          y,
+          r,
+          red,
+          green,
+          blue,
+          alp
+        })
+      }, 500);
+    }
+  </script>
+</body>
+
+</html>

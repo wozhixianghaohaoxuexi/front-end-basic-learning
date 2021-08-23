@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    /* 视口 */
+    #container {
+      width: 600px;
+      height: 300px;
+      margin: 0 auto;
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    /* 图片 */
+    #wrapper {
+      width: 2500px;
+      height: 300px;
+      /* margin-left: calc(50%-250px); */
+    }
+
+    .div1,
+    .div2,
+    .div3 {
+      width: 500px;
+      height: 300px;
+      background-color: tomato;
+      float: left;
+    }
+
+    .div2 {
+      background-color: violet;
+    }
+
+    .div3 {
+      background-color: cornflowerblue;
+    }
+
+    .left-btn,
+    .right-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 15px;
+      position: absolute;
+      top: 50%;
+
+      background-color: rgba(225, 225, 226, .6);
+      transform: translate(0, -50%);
+
+      text-align: center;
+      line-height: 30px;
+    }
+
+    .left-btn {
+      left: 10px;
+    }
+
+    .right-btn {
+      right: 10px;
+    }
+
+    .bottom-btn {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+
+      transform: translate(-50%, 0);
+    }
+
+    .bottom-btn li {
+      float: left;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background-color: rgba(225, 225, 226, .6);
+      margin: 0 5px;
+    }
+
+    .left-btn:hover,
+    .right-btn:hover,
+    .bottom-btn li:hover {
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, .8);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrapper">
+      <div class="div1">div1</div>
+      <div class="div2">div2</div>
+      <div class="div3">div3</div>
+    </div>
+
+    <div class="left-btn">&lt;</div>
+    <div class="right-btn">&gt;</div>
+
+    <ul class="bottom-btn">
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+
+
+  <script>
+    // 获取dom节点
+    const container = document.querySelector('#container');
+    const wrapper = document.querySelector('#wrapper');
+    const divList = document.querySelectorAll('#wrapper div');
+    const bottomBtnList = document.querySelectorAll('.bottom-btn li');
+
+    // 将第一个图片节点拷贝，添加到最后
+    const div1Append = divList[0].cloneNode();
+    div1Append.innerHTML = divList[0].innerHTML;
+    wrapper.appendChild(div1Append);
+    // 将第二个图片节点拷贝，添加到最后
+    const div2Append = divList[1].cloneNode();
+    div2Append.innerHTML = divList[1].innerHTML;
+    wrapper.appendChild(div2Append);
+
+    // 定义变量储存当前图片在列表中的下标
+    let pageIndex = 0;
+    // 初始化第一个圆点颜色
+    bottomBtnList[0].style.backgroundColor = 'rgba(255, 255, 255, .8)';
+    // 定义变量存储循环定时器的id
+    let intervalId;
+
+    // 改变底部圆点颜色
+    function changeBottomColor() {
+      bottomBtnList.forEach((item, index) => {
+        if (index === pageIndex) {
+          bottomBtnList[index].style.backgroundColor = 'rgba(255, 255, 255, .8)';
+        } else {
+          bottomBtnList[index].style.backgroundColor = 'rgba(225, 225, 226, .6)';
+        }
+      })
+    }
+
+    // 开启循环定时器
+    function startInterval() {
+      intervalId = setInterval(() => {
+        if (pageIndex < divList.length) {
+          pageIndex++;
+          wrapper.style.transition = 'all 1s';
+          wrapper.style.transform = `translate(${-500*pageIndex}px, 0)`;
+        }
+        // 移动到第一张的拷贝图时，在过渡结束后切换至第一张
+        if (pageIndex === divList.length) {
+          pageIndex = 0;
+          setTimeout(() => {
+            wrapper.style.transform = `translate(0, 0)`;
+            wrapper.style.transition = 'none';
+          }, 1000);
+        }
+
+        changeBottomColor();
+      }, 3000);
+    }
+
+    // 停止循环定时器
+    function stopInterval() {
+      clearInterval(intervalId);
+      intervalId = undefined;
+    }
+
+    // 初始情况下，开始轮播
+    startInterval();
+
+    // 鼠标在视口区域时，停止轮播
+    container.addEventListener('mouseover', function () {
+      // console.log('mouseover');
+      stopInterval();
+    })
+    // 鼠标移出视口区域时，开始轮播
+    container.addEventListener('mouseout', function () {
+      // console.log('mouseout');
+      if (!intervalId) {
+        startInterval();
+      }
+    })
+
+    // 图片左移方法
+    function toLeft() {
+
+    }
+
+    // 图片右移方法
+    function toRight() {
+
+    }
+
+    // 轮播图底部按钮点击事件
+    for (let i = 0; i < bottomBtnList.length; i++) {
+      bottomBtnList[i].addEventListener('click', () => {
+        pageIndex = i;
+        wrapper.style.transition = 'all 1s';
+        wrapper.style.transform = `translate(${-500*pageIndex}px, 0)`;
+        changeBottomColor();
+      })
+    }
+  </script>
+</body>
+
+</html>
