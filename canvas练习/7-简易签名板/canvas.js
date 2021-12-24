@@ -9,13 +9,16 @@ window.onload = function() {
 
     // 监听鼠标按下事件
     canvas.onmousedown = function(mousedownEvent) {
+      // 获取绘制起点，即鼠标点击到canvas元素左上角的距离
       const startX = mousedownEvent.offsetX;
       const startY = mousedownEvent.offsetY;
       ctx.beginPath();
+      // 将画笔移动到起点
       ctx.moveTo(startX, startY);
 
       // 监听鼠标移动事件
       canvas.onmousemove = function(mousemoveEvent) {
+        // 跟随鼠标移动来移动画笔
         ctx.lineTo(mousemoveEvent.offsetX, mousemoveEvent.offsetY);
         // 实时绘制
         ctx.stroke();
@@ -24,7 +27,7 @@ window.onload = function() {
       // 监听鼠标弹起事件
       canvas.onmouseup = function() {
         canvas.onmousemove = null
-        // 闭合路径，使用之后线条会闭合
+        // 闭合路径，使用之后线条起点和终点会自动连起来
         // ctx.closePath();
         // 鼠标弹起时再绘制
         // ctx.stroke();
