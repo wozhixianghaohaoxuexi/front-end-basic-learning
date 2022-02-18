@@ -61,26 +61,30 @@ MyPromise.prototype.then = function (resloveCallback, rejectCallback) {
 }
 
 
-const result = new MyPromise(function (reslove, reject) {
-  // setTimeout(() => {
-    reslove(111)
-  // }, 1000);
-}).then(res => {
-  console.log('res', res)
-  return new MyPromise((reslove, reject) => {
-    // setTimeout(() => {
-      reslove(222)
-    // }, 2000);
-  })
-}).then(res => {
-  console.log('res2', res)
-})
-// console.log(result)
-// new MyPromise((reslove, reject) => {
-//   setTimeout(() => {
-//     reslove(222)
-//   }, 2000);
+// const result = new MyPromise(function (reslove, reject) {
+//   // setTimeout(() => {
+//     reslove(111)
+//   // }, 1000);
 // }).then(res => {
 //   console.log('res', res)
+//     // setTimeout(() => {
+//       return 222
+//     // }, 2000);
+// }).then(res => {
+//   console.log('res2', res)
 // })
+
+let p1 = new MyPromise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(10)
+  }, 1000);
+})
+p1.then(res => {
+  console.log('fulfilled', res);
+  return 2 * res
+}).then(res => {
+  console.log('fulfilled', res)
+}) 
+
+
 
