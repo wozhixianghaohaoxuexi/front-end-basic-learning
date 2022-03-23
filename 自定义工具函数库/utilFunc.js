@@ -1,4 +1,11 @@
 // 1.call函数封装
+/**
+ * 
+ * @param {Function} callback 
+ * @param {Object} obj 
+ * @param  {...any} args 
+ * @returns 
+ */
 function call(callback, obj, ...args) {
   if (obj === null || obj === undefined) {
     // 当obj为null或undefined时，obj默认为全局的this，浏览器中为window，nodejs中为global
@@ -65,4 +72,18 @@ function debounce(callback, delay) {
       timeoutId = null
     }, delay);
   }
+}
+
+// 6. map
+/**
+ * 
+ * @param {Array} arr 
+ * @param {Function} callback 
+ */
+function map(arr, callback) {
+  let resArr = []
+  for (let i = 0; i < arr.length; i++) {
+    resArr.push(callback(arr[i], i))
+  }
+  return resArr
 }
