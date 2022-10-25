@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      margin: 0;
+    }
+    .wrap {
+      width: 100vw;
+      height: 100vh;
+	  overflow: hidden;
+      perspective: 1000px;
+    }
+    .content {
+      position: absolute;
+	  top: 50%;
+      right: 0;
+      width:200px;
+      height: 600px;
+      transform-origin: 100% 0;
+      transform: translateY(-50%) rotateY(-90deg);
+      background-color: pink;
+    }
+    .color-box {
+      width: 200px;
+      height: 100px;
+      background-color: skyblue;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="content">
+      <div class="color-box">1</div>
+      <div class="color-box">2</div>
+      <div class="color-box">3</div>
+      <div class="color-box">4</div>
+    </div>
+  </div>
+</body>
+</html>
